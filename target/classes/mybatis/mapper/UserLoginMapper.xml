@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.mapper.UserMapper">
+
+    <resultMap id="UserAndDeptByUser_id" type="com.feng.bean.UserInfo">
+        <id column="id" property="id"></id>
+        <result column="account" property="account"></result>
+        <result column="password" property="password"></result>
+        <result column="name" property="name"></result>
+        <result column="department_id" property="department_id"></result>
+        <result column="sex" property="sex"></result>
+        <result column="birthday" property="birthday"></result>
+        <result column="mobile" property="mobile"></result>
+        <result column="email" property="email"></result>
+        <result column="user_type" property="user_type"></result>
+        <result column="mylevel" property="mylevel"></result>
+        <result column="create_time" property="create_time"></result>
+        <result column="state" property="state"></result>
+
+
+        <collection property="departmentInfos" ofType="com.feng.bean.UserInfo">
+            <id property="department_id" column="department_id"></id>
+            <result property="department_name" column="department_name"></result>
+            <result property="manager" column="manager"></result>
+            <result property="total_user" column="total_user"></result>
+            <result property="create_time" column="create_time"></result>
+        </collection>
+
+    </resultMap>
+
+
+    <select id="userLogin" parameterType="java.lang.String" resultType="com.feng.bean.UserInfo" >
+        SELECT * FROM t_user_info WHERE  name=#{name} AND password = #{password}
+    </select>
+
+    <select id="getUser"  resultType="com.feng.bean.UserInfo" >
+        SELECT * FROM t_user_info
+    </select>
+
+    <select id="getUserById" parameterType="java.lang.Integer" resultType="com.feng.bean.UserInfo">
+        SELECT * FROM t_user_info WHERE  id = #{id}
+    </select>
+
+    <select id="getUserByAccount" parameterType="java.lang.String" resultType="com.feng.bean.UserInfo">
+        select * FROM t_user_info where account = #{account}
+    </select>
+
+
+    <!--根据user 的 id  获取 用户和部门-->
+    <select id="getUserAndDeptByUser_id" parameterType="java.lang.Integer" resultMap="UserAndDeptByUser_id">
+        select u.account,u.name,u.sex,u.mobile,u.create_time,u.email,u. FROM  t_user_info u,t_department d WHERE u.department_id=d.department_id AND u.id=#{id}
+    </select>
+
+
+    <update id="updateUser" parameterType="com.feng.bean.UserInfo" >
+        update t_user_info set password=#{password},name=#{name},department_id=#{department_id},sex=#{sex},birthday=#{birthday},mobile=#{mobile},email=#{email} WHERE account=#{account}
+    </update>
+
+
+    <!--插入-->
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id"  parameterType="com.feng.bean.UserInfo" >
+        insert into t_user_info(account,password,name,department_name,sex,mobile,birthday,email) values (#{account},#{password},#{name},#{department_name},#{sex},#{mobile},#{birthday},#{email})
+    </insert>
+
+    <delete id="deleteUserByAccount" parameterType="java.lang.String">
+        delete from t_user_info where account=#{account}
+    </delete>
+
+    <!--根据姓名模糊查询-->
+    <select id="getUserByName" parameterType="java.lang.String" resultType="com.feng.bean.UserInfo">
+        SELECT * FROM t_user_info WHERE name LIKE #{name}
+    </select>
+
+    <!--根据部门准确查询-->
+    <select id="getUserByDept" parameterType="java.lang.String" resultType="com.feng.bean.UserInfo">
+        SELECT * FROM t_user_info WHERE department_name = #{dept}
+    </select>
+
+    <!--根据姓名模糊和部门查询-->
+    <select id="getUserByNameAndDept" parameterType="java.lang.String" resultType="com.feng.bean.UserInfo">
+        SELECT * FROM t_user_info WHERE name LIKE #{name} AND department_name = #{dept}
+    </select>
+
+</mapper>

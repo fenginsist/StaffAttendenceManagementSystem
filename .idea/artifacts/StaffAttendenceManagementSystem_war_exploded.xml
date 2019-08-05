@@ -1,0 +1,33 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="StaffAttendenceManagementSystem:war exploded">
+    <output-path>$PROJECT_DIR$/target/StaffAttendenceManagementSystem</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>StaffAttendenceManagementSystem</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="StaffAttendenceManagementSystem" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.1.8" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:1.2" />
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.15" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.0" />
+          <element id="library" level="project" name="Maven: junit:junit:4.12" />
+          <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/StaffAttendenceManagementSystem/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="StaffAttendenceManagementSystem/web/Web" />
+    </root>
+  </artifact>
+</component>

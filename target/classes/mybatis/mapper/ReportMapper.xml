@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.feng.mapper.ReportMapper">
+
+    <select id="getAllReport" resultType="com.feng.bean.ReportInfo">
+        select * FROM t_report_record
+    </select>
+
+    <select id="getReportByAccount" parameterType="java.lang.String" resultType="com.feng.bean.ReportInfo">
+        select * from t_report_record where  account = #{reportAccount}
+    </select>
+
+    <update id="updateReportByAccount" parameterType="com.feng.bean.ReportInfo">
+        update t_report_record set report_date=#{report_date},work_process=#{work_process},work_content=#{work_content},tomorrow_plan=#{tomorrow_plan},problem=#{problem},other=#{other} where account=#{account}
+    </update>
+
+    <delete id="deleteReportByAccount" parameterType="java.lang.String">
+        delete from t_report_record where account = #{account}
+    </delete>
+
+    <insert id="addReport" useGeneratedKeys="true" keyProperty="report_id" parameterType="com.feng.bean.ReportInfo">
+        insert into t_report_record(name,report_date,work_process,work_content,tomorrow_plan,problem,other) values (#{name},#{report_date},#{work_process},#{work_content},#{tomorrow_plan},#{problem},#{other})
+    </insert>
+
+
+</mapper>

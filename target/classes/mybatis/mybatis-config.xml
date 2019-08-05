@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!-- 使用下面的方式配置参数，后面会有所有的参数介绍 -->
+            <!--<property name="param1" value="value1"/>-->
+        </plugin>
+    </plugins>
+    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--这里的driver是使用了最新的依赖所导致的-->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!--?useUnicode=true&characterEncoding=UTF-8-->
+                <property name="url" value="jdbc:mysql://101.132.115.92:3306/jspProject?useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mybatis/mapper/UserLoginMapper.xml"/>
+        <mapper resource="mybatis/mapper/DepartmentMapper.xml"/>
+        <mapper resource="mybatis/mapper/ReportMapper.xml"/>
+        <mapper resource="mybatis/mapper/WorkMapper.xml"/>
+        <mapper resource="mybatis/mapper/RestMapper.xml"/>
+        <!--<mapper class="com.feng.mapper.UserMapper"></mapper>-->
+    </mappers>
+
+
+
+
+
+
+</configuration>
+

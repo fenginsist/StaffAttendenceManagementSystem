@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.mapper.DepartmentMapper">
+
+
+    <select id="getAllDepartment" resultType="com.feng.bean.DepartmentInfo" >
+        SELECT * FROM t_department
+    </select>
+
+
+    <select id="getDeptById" parameterType="java.lang.Integer" resultType="com.feng.bean.DepartmentInfo">
+        select  * from  t_department where  department_id = #{dept_id}
+    </select>
+
+    <select id="getDeptAllManager" resultType="com.feng.bean.DepartmentInfo">
+        select manager from t_department
+    </select>
+
+    <select id="getDeptByName" parameterType="java.lang.String" resultType="com.feng.bean.DepartmentInfo">
+        select * from t_department where  department_name = #{department_name}
+    </select>
+
+    <delete id="deleteDeptById" parameterType="java.lang.String">
+        delete from t_department where department_id = #{id}
+    </delete>
+
+    <update id="updateDept" parameterType="com.feng.bean.DepartmentInfo">
+        update t_department set department_name = #{department_name} ,manager = #{manager} where department_id = #{department_id}
+    </update>
+
+    <insert id="addDept" useGeneratedKeys="true" keyProperty="department_id" parameterType="com.feng.bean.DepartmentInfo">
+        insert into t_department(department_name,manager,create_time) values (#{department_name},#{manager},#{create_time})
+    </insert>
+
+
+</mapper>
